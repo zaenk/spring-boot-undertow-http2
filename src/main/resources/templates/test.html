@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>HTTP/2 test</title>
+</head>
+<body>
+	<p th:text="'outbound http/2: ' + ${outbound}" />
+	<p th:text="'inbound http/2: ' + ${inbound}" />
+	<p>inbound protocol: <span id="inbound"></span></p>
+
+	<script type="text/javascript" src="/js/test.js"></script>
+</body>
+</html>

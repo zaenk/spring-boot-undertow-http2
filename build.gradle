@@ -1,0 +1,48 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'spring-boot-undertow-http2'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web") {
+		exclude module: "spring-boot-starter-tomcat"
+	}
+	compile("org.springframework.boot:spring-boot-starter-undertow")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf") // for demonstration purposes
+	runtime('org.springframework.boot:spring-boot-devtools') // in IDEA, press Ctrl+F9 for live reload
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.6.0'
+	compile group: 'org.mortbay.jetty.alpn', name: 'alpn-boot', version: '8.1.9.v20160720'
+}
+
+tasks.withType(JavaExec) {
+	doFirst {
+		jvmArgs += '-Xbootclasspath/p:' + projectDir + File.separator + 'alpn-boot-8.1.9.v20160720.jar' // update it with relevant version
+		println jvmArgs
+		println commandLine
+	}
+}

@@ -1,0 +1,16 @@
+application:
+  name: spring-boot-undertow-http2
+server:
+  port: 8443
+  ssl: # TLS only needed for inbound HTTP/2 from browsers
+    key-store: classpath:sample.jks
+    key-store-password: secret
+    key-password: secret
+app:
+  http:
+    port: 8080
+    host: localhost
+spring:
+  thymeleaf:
+    cache: false
+
